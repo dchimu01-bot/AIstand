@@ -1,0 +1,7 @@
+node_modules/
+shots/
+public/app.js
+.env
+.cache/
+out/
+public/embed.js

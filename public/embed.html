@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI VTuber デモ体験</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%236d7cff'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="./embed.css" />
+  </head>
+  <body>
+    <!-- 16:9 のステージ1枚で完結させる。親ページは iframe のサイズだけ決めればよい -->
+    <div class="stage" id="stage">
+      <div class="slide-layer is-hidden" id="slide-layer">
+        <div class="slide" id="slide">
+          <h2 class="slide-title" id="slide-title"></h2>
+          <ul class="slide-bullets" id="slide-bullets"></ul>
+        </div>
+      </div>
+
+      <canvas id="canvas"></canvas>
+      <div class="subtitle" id="subtitle"></div>
+
+      <!-- 再生バー -->
+      <div class="bar" id="bar" hidden>
+        <button class="bar-play" id="btn-play" aria-label="再生">
+          <svg viewBox="0 0 24 24" class="icon-play"><path d="M8 5v14l11-7z" /></svg>
+          <svg viewBox="0 0 24 24" class="icon-pause"><path d="M6 5h4v14H6zM14 5h4v14h-4z" /></svg>
+        </button>
+        <div class="bar-track" id="track"><div class="bar-fill" id="bar-fill"></div></div>
+        <span class="bar-time" id="time">0:00 / 0:00</span>
+        <button class="bar-mute is-on" id="btn-mute" aria-label="音声">
+          <svg viewBox="0 0 24 24" class="icon-sound">
+            <path d="M4 9v6h4l5 4V5L8 9H4zm12.5 3a4 4 0 0 0-2.5-3.7v7.4a4 4 0 0 0 2.5-3.7z" />
+          </svg>
+          <svg viewBox="0 0 24 24" class="icon-muted">
+            <path d="M4 9v6h4l5 4V5L8 9H4zm15 .4L17.6 8l-2.1 2.1L13.4 8 12 9.4l2.1 2.1L12 13.6 13.4 15l2.1-2.1 2.1 2.1 1.4-1.4-2.1-2.1L19 9.4z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- 起動〜お題選択 -->
+      <div class="panel" id="panel-start">
+        <div class="panel-inner">
+          <p class="eyebrow">AI VTuber スタジオ</p>
+          <h1 class="headline">お題を選ぶだけで、<br />VTuberが動画を作ります。</h1>
+
+          <div class="chips" id="chips"></div>
+          <p class="outline" id="outline"></p>
+
+          <button class="cta" id="btn-start" disabled>
+            <span class="cta-label">この内容で動画を作る</span>
+          </button>
+          <p class="note" id="note">VRMモデルを読み込んでいます…</p>
+        </div>
+      </div>
+
+      <!-- 生成中 -->
+      <div class="panel panel-gen" id="panel-gen" hidden>
+        <div class="panel-inner">
+          <div class="spinner"></div>
+          <ul class="genlog" id="genlog"></ul>
+        </div>
+      </div>
+
+      <!-- 再生後 -->
+      <div class="panel panel-end" id="panel-end" hidden>
+        <div class="panel-inner">
+          <h2 class="end-title">できあがりです</h2>
+          <p class="end-note" id="end-note"></p>
+          <div class="end-actions">
+            <button class="cta cta-ghost" id="btn-replay">もう一度見る</button>
+            <button class="cta" id="btn-again">別のお題で作る</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./embed.js"></script>
+  </body>
+</html>
